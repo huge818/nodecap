@@ -1,0 +1,33 @@
+{
+  "name": "nodecap",
+  "version": "0.0.1",
+  "author": "huge",
+  "description": "A cross-platform binding for performing packet capturing with node.js",
+  "main": "./nodecap",
+  "dependencies": {
+    "cap": "^0.1.2"
+  },
+  "scripts": {
+    "install": "node-gyp rebuild"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "keywords": [
+    "pcap",
+    "packet",
+    "capture",
+    "libpcap",
+    "winpcap"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/einsy/nodecap/master/LICENSE"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/einsy/nodecap.git"
+  }
+}
