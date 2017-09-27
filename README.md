@@ -58,3 +58,5 @@ nodecap methods
 sendBufer   
 close
 
+filter rules:
+http://www.tcpdump.org/manpages/pcap-filter.7.html
