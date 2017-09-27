@@ -4,6 +4,7 @@ var Cap = require('cap').Cap;
 var decoders = require('cap').decoders;
 var PROTOCOL = decoders.PROTOCOL;
 
+
  Buffer.prototype.subArr=function(n,L){
  	return this.slice(n,n+L);
  }
@@ -57,7 +58,7 @@ var nodecap=function(){
 				srcport:ret.info.srcport,
 				dstport:ret.info.dstport,
 				ret:ret,
-				RAWPROTOCOL:PROTOCOL
+				//RAWPROTOCOL:PROTOCOL
 			};
 
 			if (ret.info.protocol === PROTOCOL.IP.TCP) {
@@ -66,15 +67,24 @@ var nodecap=function(){
 				datalen -= ret.hdrlen;
 				resdata.dataLength=datalen;
 				resdata.protocol="tcp";
+				resdata.srcport=ret.info.srcport;
+				resdata.dstport=ret.info.dstport;
 				var rawData=buffer.slice(0, nbytes).toString("hex");
 				if(N==0){
+					/*
 					console.log(0,buffer.subArr(0, 6).toString("hex")); // 目的mac地址 
 					console.log(1,buffer.subArr(6, 6).toString("hex"));  // 源mac地址 
 					console.log(2,buffer.subArr(12,2));  // 类型 
 					console.log(3,buffer.subArr(14,12));  // 版本长度，标识等。。。
 					console.log(4,buffer.subArr(26,4).toString("hex"));  // 32位源IP 
 					console.log(5,buffer.subArr(30,4).toString("hex"));  // 32位目的IP 
+					console.log("ret.info",ret.info);
+					*/
 				}
+				resdata.destmac=buffer.subArr(0, 6).toString("hex");
+				resdata.sourcemac=buffer.subArr(6, 6).toString("hex");
+				resdata.destip=buffer.subArr(30,4).toString("hex");
+				resdata.sourceip=buffer.subArr(26,4).toString("hex");
 				fn&&fn(resdata);
 				return;
 			}
